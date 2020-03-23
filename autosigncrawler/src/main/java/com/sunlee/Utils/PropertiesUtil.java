@@ -29,15 +29,15 @@ public class PropertiesUtil {
             //prop.load(in);//直接这么写，如果properties文件中有汉子，则汉字会乱码。因为未设置编码格式。
              prop.load(new InputStreamReader(in, StandardCharsets.UTF_8));
 
-            System.out.println("====================="+prop.getProperty("course_1"));
             map.put("myCookie", prop.getProperty("myCookie"));
-            map.put("schedule", prop.getProperty("schedule"));
+
             map.put("userAgent", prop.getProperty("userAgent"));
             for (int i = 1; i <= 10; i++) {
                 if (prop.getProperty("course_" + i)!=null) {
                     map.put("course_"+i, prop.getProperty("course_"+i));
                     map.put("courseId_"+i, prop.getProperty("courseId_"+i));
                     map.put("classId_"+i, prop.getProperty("classId_"+i));
+                    map.put("schedule_"+i, prop.getProperty("schedule_"+i));
                 }else {
                     return map;
                 }

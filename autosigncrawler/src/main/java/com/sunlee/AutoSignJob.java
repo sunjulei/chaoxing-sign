@@ -103,24 +103,15 @@ public class AutoSignJob implements Job {
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         JobDataMap map = jobExecutionContext.getMergedJobDataMap();
 
-        String cookie = map.get("cookie").toString();
-        String userAgent = map.get("userAgent").toString();
         try {
-            for (int i = 1; i <= (map.size() - 3) / 3; i++) {
-
-                if (map.get("course_" + i) != null) {
-                    Thread.sleep(1000);
-                    AutoSignJob sign = new AutoSignJob();
-                    sign.setData(
-                            map.get("course_" + i).toString(),
-                            map.get("courseId_" + i).toString(),
-                            map.get("classId_" + i).toString(),
-                            cookie,
-                            userAgent);
-                    sign.toSign();
-                }
-
-            }
+            AutoSignJob sign = new AutoSignJob();
+            sign.setData(
+                    map.get("courseName").toString(),
+                    map.get("courseId").toString(),
+                    map.get("classId").toString(),
+                    map.get("cookie").toString(),
+                    map.get("userAgent").toString());
+            sign.toSign();
         } catch (Exception e) {
             e.printStackTrace();
         }
